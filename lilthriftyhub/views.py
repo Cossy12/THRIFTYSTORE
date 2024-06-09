@@ -265,6 +265,32 @@ def lilthrifty_add_to_cart(request):
 
 
 
+# Cart List Page
+#@login_required
+def lilthrifty_cart_list(request):
+	products=Product.objects.all().order_by('-id')
+	brand=Brand.objects.all().order_by('-id')
+	brands=ProductAttribute.getallbrands(brand)
+	producted=ProductAttribute.getproduct(products)
+	category=Category.objects.all().order_by('-id')
+	datas=Category.objects.get(id=2)
+	dataz=ProductAttribute.getCategories(category)
+	datamen=Category.objects.get(id=1)
+	category_all=Category.objects.all().order_by('id')
+	category_update=ProductAttribute.get_categories(category_all)
+	all_datazmen=ProductAttribute.getallCategories(category)
+	datazmen=ProductAttribute.getmenCategories(category)
+	total_amt=0
+	sum_total_amt=0
+	if 'cartdata' in request.session:
+		for p_id,item in request.session['cartdata'].items():
+			total_amt+=int(item['qty'])*float(item['price'])
+			sum_total_amt=total_amt+int(100)
+		return render(request, 'cart.html',{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'sum_total_amt':sum_total_amt,'datas':datas,'brands':brands,'producted':producted,'dataz':dataz,'datamen':datamen,'datazmen':datazmen,'All_category':category_update,'all_datazmen':all_datazmen})
+	else:
+		return render(request, 'cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt,'sum_total_amt':sum_total_amt,'datas':datas,'brands':brands,'producted':producted,'dataz':dataz,'datamen':datamen,'datazmen':datazmen,'All_category':category_update,'all_datazmen':all_datazmen})
+
+
 
 
 
