@@ -58,7 +58,7 @@ We welcome contributions to ThriftHub! Whether it's fixing bugs, adding new feat
 
 ## Support
 
-If you encounter any issues or have questions regarding ThriftHub, please feel free to [open an issue](https://github.com/your-username/thrifthub/issues). We're here to help!
+If you encounter any issues or have questions regarding ThriftHub, please feel free to [open an issue]https://github.com/Cossy12/THRIFTYSTORE.git. We're here to help!
 
 ## License
 
