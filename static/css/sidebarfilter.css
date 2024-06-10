@@ -1,0 +1,135 @@
+main.cd-main-content {
+  margin-bottom: 50px;
+}
+
+
+  .sidebar-filter::before {
+    /* top colored bar */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-color: #141318;
+    z-index: 2;
+  }
+  .sidebar-filter::after {
+    /* top colored bar */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-color: #141318;
+    z-index: 2;
+  }
+  
+  .sidebar-filter::-webkit-scrollbar {
+      display: none;
+    }
+  .sidebar-filter form {
+    padding: 70px 20px;
+  }
+  .sidebar-filter .cd-close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 50px;
+    line-height: 50px;
+    width: 60px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    text-align: center;
+    background: #0a0a0c;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    z-index: 3;
+    text-decoration: none;
+  }
+  .no-touch .sidebar-filter .cd-close:hover {
+    background: #7f76a0;
+  }
+  .sidebar-filter.filter-is-visible {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  .sidebar-filter.filter-is-visible .cd-close {
+    opacity: 1;
+  }
+  @media only screen and (min-width: 1170px) {
+    .sidebar-filter {
+      width: 20%;
+    }
+    .sidebar-filter form {
+      padding: 70px 10%;
+    }
+  }
+
+  
+  .sidebar-filter-block .checkbox-label::before {
+    /* shared style for input elements */
+    font-family: "Open Sans", sans-serif;
+    border-radius: 0;
+    background-color: #ffffff;
+    border: 2px solid #e6e6e6;
+  }
+  .sidebar-filter-block input[type='search'],
+  .sidebar-filter-block input[type='text'] {
+    width: 100%;
+    padding: .8em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    box-shadow: none;
+  }
+  .sidebar-filter-block input[type='search']:focus,
+  .sidebar-filter-block input[type='text']:focus,
+  .sidebar-filter-block select:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #41307c;
+  }
+  .sidebar-filter-block input[type='search'] {
+    /* custom style for the search element */
+    border-color: transparent;
+    background-color: #e6e6e6;
+    /* prevent jump - ios devices */
+    font-size: 1.6rem !important;
+  }
+
+  .sidebar-filter-block .checkbox-label::after{
+    /* check mark - hidden */
+    display: none;
+  }
+  .sidebar-filter-block .checkbox-label::after {
+    /* check mark style for check boxes */
+    width: 16px;
+    height: 16px;
+  }
+  
+  
+  .sidebar-filter-block input[type=checkbox]:checked + label::before {
+    border-color: black;
+    background-color: black;
+  }
+  
+  .sidebar-filter-block input[type=checkbox]:checked + label::after {
+    display: block;
+  }
+  
+  @-moz-document url-prefix() {
+    /* hide custom arrow on Firefox - select element */
+    .sidebar-filter-block .cd-select::after {
+      display: none;
+    }
+  }

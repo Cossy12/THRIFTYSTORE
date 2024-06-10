@@ -1,0 +1,134 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Festive&family=Roboto:ital,wght@1,100&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Rubik+Wet+Paint&display=swap');
+
+.brand-block
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  overflow-x: hidden;
+
+
+}
+.background_image
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 1560px;
+  height: 800px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 1em #e5e5e5;
+
+}
+
+.main_form_ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.form {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1em;
+  color: #001219;
+}
+
+form {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.5em;
+  font-size: 1.05rem;
+}
+
+input {
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  background-color: #e6e6e6;
+}
+
+
+
+
+@media (max-width: 424px) {
+  html {
+    font-size: 12px;
+  }
+  .container {
+    height: 700px;
+    margin: 150px 0;
+
+  }
+  
+  .main_form_,
+  aside {
+    width: 100%;
+  }
+
+  .main_form_ {
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  aside {
+    top: 120%;
+    left: 0;
+    transform: translateY(-100%);
+    height: 30%;
+  }
+
+  .main_form_.slideRight {
+    top: 120%;
+    left: 0;
+    transform: translate(0, -100%);
+  }
+
+  aside.slideLeft {
+    top: 10%;
+    transform: translateY(0);
+  }
+}

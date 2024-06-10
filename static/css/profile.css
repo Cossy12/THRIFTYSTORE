@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--black: #0c0a0a;
+	--blue: #3C91E6;
+	--black-blue: #CFE8FF;
+	--white:white;
+	--dark-grey: #AAAAAA;
+	--dark: #342E37;
+	--red:white;
+	--yellow: #FFCE26;
+	--black-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--black-orange: #FFE0D3;
+}
+
+html {
+	overflow-x: hidden;
+}
+
+
+
+body {
+	background: var(--white);
+	overflow-x: hidden;
+}
+
+
+
+
+
+/* menu_sidebar */
+#menu_sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 280px;
+	height: 100%;
+	background: var(--black);
+	z-index: 2000;
+	font-family: var(--lato);
+	transition: .3s ease;
+	overflow-x: hidden;
+	scrollbar-width: none;
+}
+#menu_sidebar::--webkit-scrollbar {
+	display: none;
+}
+#menu_sidebar.hide {
+	width: 60px;
+}
+#menu_sidebar .brand {
+	font-size: 24px;
+	font-weight: 700;
+	height: 56px;
+	display: flex;
+	align-items: center;
+    color: white;
+	position: sticky;
+	top: 0;
+	left: 20px;
+	background: var(--black);
+	z-index: 500;
+	padding-bottom: 20px;
+	box-sizing: content-box;
+	text-transform: capitalize;
+	text-decoration: none;
+
+
+}
+#menu_sidebar .brand .icon {
+	min-width: 60px;
+	display: flex;
+	justify-content: center;
+}
+#menu_sidebar .sidebar {
+	width: 100%;
+	margin-top: 48px;
+}
+#menu_sidebar .sidebar li {
+	height: 48px;
+	background: transparent;
+	margin-left: 6px;
+	border-radius: 48px 0 0 48px;
+	padding: 4px;
+}
+#menu_sidebar .sidebar li.active {
+	background: var(--white);
+	position: relative;
+}
+#menu_sidebar .sidebar li.active::before {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	top: -40px;
+	right: 0;
+	box-shadow: 20px 20px 0 var(--white);
+	z-index: -1;
+}
+#menu_sidebar .sidebar li.active::after {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	bottom: -40px;
+	right: 0;
+	box-shadow: 20px -20px 0 var(--white);
+	z-index: -1;
+}
+
+
+
+
+
+/* CONTENT */
+#main_adminpage {
+	position: relative;
+	width: calc(100% - 280px);
+	left: 280px;
+	transition: .3s ease;
+}
+#menu_sidebar.hide ~ #main_adminpage {
+	width: calc(100% - 60px);
+	left: 60px;
+}
+
+#menu_sidebar.hide {
+    width: 81px;
+    left: -21px;
+}
+#menu_sidebar.hide ~ #main_adminpage nav {
+	left: 30px;
+}
+
+
+
+
+
+
+/* NAVBAR */
+#main_adminpage nav {
+	height: 56px;
+	background: var(--black);
+	padding: 0 24px;
+	display: flex;
+	align-items: center;
+	grid-gap: 24px;
+	font-family: var(--lato);
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	color: white;
+	font-size: 15px;
+}
+
+
+
+#main_adminpage main .admin_stat {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-gap: 24px;
+	margin-top: 36px;
+}
+#main_adminpage main .admin_stat li {
+	padding: 24px;
+	background: var(--black);
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	grid-gap: 24px;
+}
+#main_adminpage main .admin_stat li .icon {
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+	font-size: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#main_adminpage main .admin_stat li:nth-child(1) .icon {
+	background: var(--black-blue);
+	color: var(--blue);
+}
+#main_adminpage main .admin_stat li:nth-child(2) .icon {
+	background: var(--black-yellow);
+	color: var(--yellow);
+}
+#main_adminpage main .admin_stat li:nth-child(3) .icon {
+	background: var(--black-orange);
+	color: var(--orange);
+}
+#main_adminpage main .admin_stat li:nth-child(4) .icon {
+	background: white;
+	color: black;
+}
+#main_adminpage main .admin_stat li .text h3 {
+	font-size: 24px;
+	font-weight: 600;
+	color: white;
+}
+#main_adminpage main .admin_stat li .text p {
+	color: white;	
+}
+
+
+
+
+
+@media screen and (max-width: 576px) {
+
+	#main_adminpage nav form.show ~ .profile {
+		display: none;
+	}
+
+	#main_adminpage main .admin_stat {
+		grid-template-columns: 1fr;
+	}
+
+
+}
