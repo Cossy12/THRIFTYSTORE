@@ -85,30 +85,12 @@ function DirectionsToggle(){
               grecaptcha.ready(function() {
                 grecaptcha.execute(recaptcha_site_key, {action: "/"}).then(function(token) {
   
-                  document.getElementById('id_token').value = token;
               
                   var formdata = form.serialize() 
                   $.ajax({
                       url: form.attr("action"),
                       method: form.attr("method"),
                       data: formdata,
-                      success: function(json){
-                          CustomFormSubmitResponse($('#signupform button[type=submit]'));
-                          if (json["result"] == "Success"){
-                            // var redirect = "/accounts/sign-out"
-                            var redirect = "/"
-                        }
-                          else{
-                            var redirect = false
-                          }
-                          ShowAlert(json["result"], json["message"], json["result"].toLowerCase(), redirect);
-
-                      },
-                      error: function(xhr){
-                          CustomFormSubmitResponse($('#signupform button[type=submit]'));
-                          ShowAlert("Error", "There was an error, please try again", "error", false);
-                          console.log(xhr.status + ": " + xhr.responseText);
-                      }
                   }) 
               })
               })
@@ -116,44 +98,7 @@ function DirectionsToggle(){
           })    
       };
   
-      var usersignin = function (){
-          var form = $('#signinform')
-          form.submit(function(event){
-              event.preventDefault();
-              CustomFormSubmitPost($('#signinform button[type=submit]'));
-              
-              var formdata = form.serialize() 
-              $.ajax({
-                  url: form.attr("action"),
-                  method: form.attr("method"),
-                  data: formdata,
-                  success: function(json){
-                      CustomFormSubmitResponse($('#signinform button[type=submit]'));
-                      if (json["result"] == "Success"){
-                        // var redirect = "/accounts/sign-out"
-                        var redirect = "/"
 
-                        // var redirect = false
-                    }
-                      else{
-                        var redirect = false
-                      }
-
-
-                      
-                      ShowAlert(json["result"], json["message"], json["result"].toLowerCase(), redirect);
-                  },
-                  error: function(xhr){
-                      CustomFormSubmitResponse($('#signinform button[type=submit]'));
-                    //   ShowAlert("Error", "There was an error, please try again", "error", false);
-                      ShowAlert("sorry", "The app site is under update, please try again later", "sorry for the inconvinience", false);
-
-                      console.log(xhr.status + ": " + xhr.responseText);
-                  }
-              }) 
-          });
-      };
-  
   
   
       return {
@@ -164,54 +109,4 @@ function DirectionsToggle(){
       };
   }();
   
-  jQuery(document).ready(function() {     
-      FormControls.init();
-  });
-  
-  $(function() {
-      // This function gets cookie with a given name
-      function getCookie(name) {
-          var cookieValue = null;
-          if (document.cookie && document.cookie != '') {
-              var cookies = document.cookie.split(';');
-              for (var i = 0; i < cookies.length; i++) {
-                  var cookie = jQuery.trim(cookies[i]);
-                  // Does this cookie string begin with the name we want?
-                  if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                      break;
-                  }
-              }
-          }
-          return cookieValue;
-      }
-      var csrftoken = getCookie('csrftoken');
-      function csrfSafeMethod(method) {
-          // these HTTP methods do not require CSRF protection
-          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-      }
-      function sameOrigin(url) {
-          // test that a given url is a same-origin URL
-          // url could be relative or scheme relative or absolute
-          var host = document.location.host; // host + port
-          var protocol = document.location.protocol;
-          var sr_origin = '//' + host;
-          var origin = protocol + sr_origin;
-          // Allow absolute or scheme relative URLs to same origin
-          return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-              (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-              // or any other URL that isn't scheme relative or absolute i.e relative.
-              !(/^(\/\/|http:|https:).*/.test(url));
-      }
-      $.ajaxSetup({
-          beforeSend: function(xhr, settings) {
-              if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                  // Send the token to same-origin, relative URLs only.
-                  // Send the token only if the method warrants CSRF protection
-                  // Using the CSRFToken value acquired earlier
-                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-          }
-      });
-  })
 
