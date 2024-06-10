@@ -1,0 +1,169 @@
+{% extends 'index.html' %}
+
+{% load static %}
+	{% block content %}
+	
+	{% block css %}
+    <link rel="stylesheet" type="text/css" href="{%static 'styles/product_available_list.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/sidebarfilter.css'%}">
+
+	{% endblock %}
+
+	{% block js %}
+	<script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'product-filter.js' %}"></script>
+<script type="text/javascript" src="{% static 'sidebarfilter.js' %}"></script>
+		{% endblock %}
+ 
+	
+<section id="featureds">
+
+	<div class="container swiper">
+  
+		<main class="cd-main-content" style="margin-bottom: 40px;">
+
+
+			<div class="sidebar-filter">
+				<form>
+					<div class="sidebar-filter-block">
+						<h4>select price</h4>
+	
+						<ul class="sidebar-filter-content sidebar-filters list">
+							<li>
+								<input type="range" value="{{minMaxPrice.price__min}}" max={{minMaxPrice.price__max}} min={{minMaxPrice.price__min}} id="rangeInput" oninput="maxPrice.value=this.value" />
+								<p>{{minMaxPrice.price__min}}-{{minMaxPrice.price__max}}</p>
+							
+								Max: <input type="number" value="{{maxMinPrice.price__min}}" max={{minMaxPrice.price__max}} min={{minMaxPrice.price__min}} class="form-control" id="maxPrice" onkeyup="rangeInput.value=this.value" id="maxPrice" />
+				  <button  data-limit="{{product.id}}" id="priceFilterBtn_product_branch">Filter</button>
+							</li>
+						</ul> <!-- sidebar-filter-content -->
+					</div> <!-- sidebar-filter-block -->
+			<div class="sidebar-filter-block">
+						<h4>Choose sizes</h4>
+	
+						<ul class="sidebar-filter-content sidebar-filters list">
+				{% for size in sizes %}
+	
+							<li>
+	
+				  <input class=" filter-checkbox filter " data-filter="size" value="{{size.size__id}}" type="checkbox" id="{{size.size__title}}" />&nbsp;
+				  <label class="checkbox-label" for="{{size.size__title}}">{{size.size__title}}</label>
+	
+							</li>
+				{% endfor %}
+	
+						</ul> <!-- sidebar-filter-content -->
+					</div> <!-- sidebar-filter-block -->
+			<div class="sidebar-filter-block">
+						<h4>Choose color</h4>
+	
+						<ul class="sidebar-filter-content sidebar-filters list">
+				{% for color in colors %}
+	
+							<li>
+				  <input class=" filter-checkbox filter " data-filter="color" value="{{color.color__id}}" type="checkbox"  id="{{color.color__title}}" />&nbsp;
+				  <label class="checkbox-label " style="background-color:{{color.color__color_code}};cursor: pointer; width: 20px;height: 10px;border: radius 10px;" for="{{color.color__title}}">
+	
+	
+					  
+							</li>
+				{% endfor %}
+						</ul> <!-- sidebar-filter-content -->
+					</div> <!-- sidebar-filter-block -->
+			<div class="sidebar-filter-block">
+						<h4>Choose Type</h4>
+	
+						<ul class="sidebar-filter-content sidebar-filters list">
+				{% for product in products %}
+	
+							<li>
+				  <input class=" filter-checkbox filter" data-filter="product" value="{{product.product__id}}" type="checkbox" id="{{product.product__title}}"/>&nbsp;
+				  <label class="checkbox-label" for="{{product.product__title}}">{{product.product__title}}</label>
+	
+					  
+							</li>
+				{% endfor %}
+						</ul> <!-- sidebar-filter-content -->
+					</div> <!-- sidebar-filter-block -->
+			<div class="sidebar-filter-block">
+						<h4>Choose Brand</h4>
+	
+						<ul class="sidebar-filter-content sidebar-filters list">
+				{% for brand in branded %}
+	
+							<li>
+				  <input class=" filter-checkbox filter" data-filter="brand" value="{{brand.brand__id}}" type="checkbox" id="{{brand.brand__title}}"/>&nbsp;
+				  <label class="checkbox-label" for="{{brand.brand__title}}">{{brand.brand__title}}</label>
+	
+					  
+							</li>
+				{% endfor %}
+						</ul> <!-- sidebar-filter-content -->
+					</div> <!-- sidebar-filter-block -->
+				
+				</form>
+	
+				<a href="#0" class="cd-close">Close</a>
+			</div> <!-- sidebar-filter -->
+	
+			<a href="#0" class="sidebar-filter-trigger">Filters</a>
+		</main> <!-- cd-main-content --> 
+		<div  id="filteredProducts_product_branch">
+
+		{% for product in datazing %}
+	
+		<h1 class="headings" style="font-size: 25px;">{{product.product.title}}</h1>
+	
+		{% endfor %}
+	
+		<div class="productcat-container">
+			{% for product in data %}
+	
+			 <div class="box">
+				<div class="box1">
+					<div class="icons">
+						<a href="#" class="fas fa-heart"></a>
+						<a href="#" class="fas fa-share"></a>
+						<a href="/product_detail/{{product.id}}" class="fas fa-eye"></a>
+					</div>
+				<div class="image">
+					<a href="/product_detail/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.title}}"></a>
+				</div>
+				<div class="content">
+				  <h3 class="card-text"><a href="/product_detail/{{product.id}}">{{product.title}}</a></h3>
+				  <p>$ <span class="product-price-{{product.id}}">{{product.price}}</span></p>
+				  <div class="content-icons">
+					<a href="#" class="fas fa-heart"></a>
+					<a href="#" class="fas fa-share"></a>
+					<a href="/product_detail/{{product.id}}" class="fas fa-eye"></a>
+				  </div>
+				  <input type="hidden" value="1" class="form-control product-qty-{{product.id}}" id="productQty" />
+				  <input type="hidden" class="product-image-{{product.id}}" value="{{product.image}}" />
+				  <input type="hidden" class="product-id-{{product.id}}" value="{{product.id}}" />
+				  <input type="hidden" class="product-title-{{product.id}}" value="{{product.title}}" />
+					<input type="hidden" class="product-size-{{product.id}}" value="{{product.size}}" />
+						  <input type="hidden" class="product-color-{{product.id}}" value="{{product.color}}" />
+						  <input type="hidden" class="product-manager-{{product.id}}" value="{{product.product_manager}}" />
+				  <button  class="btn  add-to-cart" data-index="{{product.id}}" type="button" id="addToCartBtn">Add to cart</button>
+				</div>
+				</div>
+			 </div>
+			 {% endfor %}
+	
+			 
+		  </div>
+	    </div>
+	 
+	  </div>
+  </section>
+
+
+  {% endblock %}
+
+</body>
+</html>
+
+
+
+

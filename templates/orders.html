@@ -1,0 +1,157 @@
+
+{% extends 'profile.html' %}
+
+{% load static %}
+{% block content %}
+
+	<!-- main_adminpage -->
+			<ul class="admin_stat">
+				<li>
+					<i class="icon uil uil-shopping-cart-alt"></i>
+					<span class="text">
+						<h3>1020</h3>
+						<p>Orders</p>
+					</span>
+				</li>
+				<li>
+					<i class="icon uil uil-shop"></i>
+					<span class="text">
+						<h3>2834</h3>
+						<p>store</p>
+					</span>
+				</li>
+				<li>
+					<i class="icon uil uil-cloud-upload"></i>
+					<span class="text">
+						<h3>2834</h3>
+						<p>upload</p>
+					</span>
+				</li>
+				<li>
+					<i class="icon uil uil-bill"></i>
+					<span class="text">
+						<h3>$2543</h3>
+						<p>Total Sales</p>
+					</span>
+				</li>
+			</ul>
+
+
+			<div class="order_nav">
+				<div class="orders_available">
+					<div class="order_title">
+						<h3>Recent Orders</h3>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>OrderNo</th>
+								<th>Total Amt</th>
+								<th>Status</th>
+								<th>Order Time</th>
+								<th>Thrift manager</th>
+								<th>Thrifter </th>
+							</tr>
+						</thead>
+						<tbody>
+								{% for order in managerorders %}
+
+								<tr>
+									<td><a href="{% url 'plugmanager:orderlist' order.order.id %}" class="btn btn-sm btn-dark">{{order.order.id}}</a></td>
+		
+									<td>{{order.order.total_amt}}</td>
+									<td><span class="status completed">{{order.order.order_status}}</span></td>
+									<td>{{order.order.order_dt}}</td>
+									<td>{{order.manager}}</td>
+									<td>{{order.customer}}</td>
+		
+									
+								</tr>
+								{% endfor %}
+				
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="order_nav">
+				<div class="orders_available">
+					<div class="order_title">
+						<h3>Admin orders</h3>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>OrderNo</th>
+								<th>Total Amt</th>
+								<th>Status</th>
+								<th>Order Time</th>
+								<th>Thrift manager</th>
+								<th>Thrifter </th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for order in orders %}
+							{% for ordered in ordered %}
+	
+							{% if ordered.order.id == order.order.id %}
+	
+	
+							<tr>
+								<td><a href="{% url 'customer:Thrift-orderlist' ordered.order.id %}" class="btn btn-sm btn-dark">{{ordered.order.id}}</a></td>
+
+								<td>{{ordered.order.total_amt}}</td>
+								<td><span class="status completed">{{ordered.order.order_status}}</span></td>
+								<td>{{ordered.order.order_dt}}</td>
+								<td>{{ordered.manager}}</td>
+								<td>
+									
+									{{ordered.customer}}
+								</td>
+							</tr>
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+<!--
+
+							{% for order in orders %}
+							{% for ordered in ordered %}
+	
+							{% if ordered.order.id == order.order.id %}
+	
+	
+							<tr>
+								<td><a href="{% url 'customer:Thrift-orderlist' ordered.order.id %}" class="btn btn-sm btn-dark">{{ordered.order.id}}</a></td>
+
+								<td>{{ordered.order.total_amt}}</td>
+								<td><span class="status completed">{{ordered.order.order_status}}</span></td>
+								<td>{{ordered.order.order_dt}}</td>
+								<td>{{ordered.manager}}</td>
+								<td>
+									
+									{{ordered.customer}}
+								</td>
+							</tr>
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+
+
+-->

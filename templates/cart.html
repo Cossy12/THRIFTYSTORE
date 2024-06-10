@@ -1,0 +1,137 @@
+
+{% extends 'index.html' %}
+
+{% load static %}
+<body>
+
+	
+	{% block content %}
+	{% block css %}
+  <link rel="stylesheet" href="{%static 'styles/cart.css'%}">
+	{% endblock %}
+	{% block scripts %}
+	<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+	{% endblock %}
+
+  {% if totalitems %}
+   <main>
+    <div class="Cart">
+      <div class="Cart-main">
+        <h3 class="my-4 border-bottom pb-1">Items in Cart ({{totalitems}})</h3>
+        <ul>
+          <li class="item item-heading">Item</li>
+          <li class="price">Price</li>
+          <li class="quantity">Quantity</li>
+          <li class="subtotal">Subtotal</li>
+        </ul>
+      </div>
+      {% for product_id,item in cart_data.items %}
+      <div class="Cart-Item">
+        <div class="item">
+          <div class="item-image">
+            <img src="/media/{{item.image}}" width="50" class="product-frame" />
+          </div>
+          <div class="product-details">
+            <h1><strong>{{item.product}}{{item.brand}}</strong> <a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></h1>
+            <p><strong>{{item.color}}, {{item.size}}</strong></p>
+            <p>Product Code - {{product_id}}</p>
+
+          </div>
+        </div>
+        <div class="price">price:$ {{item.price}}</div>
+        <div class="quantity">
+            <input type="number" class="product-qty-{{product_id}}" value="{{item.qty}}" style="vertical-align: bottom;" />
+        </div>
+        <div class="subtotal">subtotal:$ {% widthratio item.price 1 item.qty %}</div>
+        <div class="remove">
+          <a href=""><button class="update-item" data-item="{{product_id}}">Update</button></i></a>
+					<a href=""><button class="delete-item" data-item="{{product_id}}"> Remove</button></a>    
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <aside>
+      <div class="checkout">
+        <div class="checkout-total-items"><span class="total-items"></span> Items in your Bag</div>
+        <div class="checkout-subtotal">
+          {% for product_id,item in cart_data.items %}
+          <div class="item-in-cart">
+            {{item.qty}} {{item.title}}
+          </div>
+          <div class="item-price">
+            $ {% widthratio item.price 1 item.qty %}
+          </div>
+          {% endfor %}
+          <div class="subtotal-title">Subtotal</div>
+          <div class="subtotal-value final-value" id="Cart-subtotal">${{total_amt}}</div>
+        </div>
+        <div class="Delivery">
+     <input type="text" class="Delivery-input" placeholder="Enter Delivery location">
+        </div>
+        <div class="checkout-total">
+          <div class="shipping">Shipping cost</div>
+          <div class="shipping-cost">100</div>
+          <div class="total-title">Total</div>
+          <div class="total-value final-value" id="Cart-total">${{sum_total_amt}}</div>
+        </div>
+        {% if totalitems %}
+        <div class="Btn-checkout">
+          <a href="{% url 'cart-checkout' %}" class="text-decoration-none"><button class="checkout-btn">Go to Secure Checkout</button></a>
+          
+        </div>
+        {% endif %}
+      </div>
+    </aside>
+  </main>
+      {%else%}
+  <main>
+    <div class="Cart">
+      <div class="Cart-main">
+        <h3 class="my-4 border-bottom pb-1">No items added in cart </h3>
+        <h3 class="">Items in cart {{totalitems}} </h3>
+        <h3 class="">please add item in the  cart to proceed to checkout</h3>
+      </div>
+    </div>
+  </main>
+  {% endif %}
+
+	{% endblock %}
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
